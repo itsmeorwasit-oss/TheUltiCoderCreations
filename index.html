@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ulti Coders Creations</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #060913;
+            /* Sleek tech grid alignment blueprint */
+            background-image: 
+                linear-gradient(rgba(30, 41, 59, 0.5) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 41, 59, 0.5) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center top;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 20px;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        header h1 {
+            font-size: 3.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.1));
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #6366f1;
+            font-weight: 600;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        .header-line {
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #6366f1, transparent);
+            margin: 20px auto 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1300px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .game-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 30px;
+            text-decoration: none;
+            border-radius: 20px;
+            position: relative;
+            min-height: 220px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background-color: #0f1424;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Large background icon decoration */
+        .card-icon-bg {
+            position: absolute;
+            right: -15px;
+            bottom: -15px;
+            font-size: 7.5rem;
+            opacity: 0.06;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .game-card:hover .card-icon-bg {
+            transform: scale(1.15) rotate(-10deg);
+            opacity: 0.15;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .title-text {
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 800;
+            position: relative;
+            z-index: 2;
+            transition: color 0.3s ease;
+        }
+
+        /* SVG Graph detailing overlay */
+        .card-bg-graph {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            opacity: 0.12;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .game-card:hover .card-bg-graph {
+            opacity: 0.35;
+        }
+
+        /* --- VISUAL ACCURACY THEMING --- */
+        
+        /* 1. Sovereign Press (Newspaper / Gold Wealth Theme) */
+        .sovereign { background: linear-gradient(135deg, #181c2b, #111422); border-top: 5px solid #eab308; }
+        .sovereign .tag { color: #eab308; background: rgba(234, 179, 8, 0.1); }
+        .sovereign:hover .title-text { color: #eab308; }
+
+        /* 2. The MC Chronos (Minecraft Grass Block Green and Dirt Brown Theme) */
+        .chronos { background: linear-gradient(135deg, #27201c, #1a1512); border-top: 5px solid #22c55e; }
+        .chronos .tag { color: #22c55e; background: rgba(34, 197, 94, 0.1); }
+        .chronos:hover .title-text { color: #4ade80; }
+
+        /* 3. Gaming Oracle (Cosmic Mystic Purple Theme) */
+        .oracle { background: linear-gradient(135deg, #1e1135, #0f071c); border-top: 5px solid #a855f7; }
+        .oracle .tag { color: #c084fc; background: rgba(168, 85, 247, 0.1); }
+        .oracle:hover .title-text { color: #c084fc; }
+
+        /* 4. Vault Matrix (Matrix Hacking Terminal Digital Green Theme) */
+        .vault { background: linear-gradient(135deg, #050a07, #010202); border-top: 5px solid #00ff66; font-family: 'Courier New', monospace; }
+        .vault .tag { color: #00ff66; background: rgba(0, 255, 102, 0.1); }
+        .vault:hover .title-text { color: #00ff66; text-shadow: 0 0 8px rgba(0,255,102,0.6); }
+
+        /* 5. Airplane (Aviation Sky Horizon Blue Theme) */
+        .airplane { background: linear-gradient(135deg, #0f243a, #071320); border-top: 5px solid #06b6d4; }
+        .airplane .tag { color: #22d3ee; background: rgba(6, 182, 212, 0.1); }
+        .airplane:hover .title-text { color: #22d3ee; }
+
+        /* 6. Creators Words (Story Writer/Manuscript Deep Crimson Theme) */
+        .creators { background: linear-gradient(135deg, #261219, #15070c); border-top: 5px solid #f43f5e; }
+        .creators .tag { color: #fb7185; background: rgba(244, 63, 94, 0.1); }
+        .creators:hover .title-text { color: #fb7185; }
+
+        /* 7. Ice Cream Game (Pastel Ice Cream Strawberry & Sweet Theme) */
+        .icecream { background: linear-gradient(135deg, #2c1624, #1a0a14); border-top: 5px solid #f472b6; }
+        .icecream .tag { color: #f472b6; background: rgba(244, 114, 182, 0.1); }
+        .icecream:hover .title-text { color: #f472b6; }
+
+        /* 8. Space Recon (Deep Deep Space Starfield Navy Theme) */
+        .space { background: linear-gradient(135deg, #0b1329, #030712); border-top: 5px solid #3b82f6; }
+        .space .tag { color: #60a5fa; background: rgba(59, 130, 246, 0.1); }
+        .space:hover .title-text { color: #60a5fa; }
+
+        /* 9. Cursor Combat (Cyberpunk Action Laser Red Theme) */
+        .cursor { background: linear-gradient(135deg, #2d1212, #170707); border-top: 5px solid #ef4444; }
+        .cursor .tag { color: #f87171; background: rgba(239, 68, 68, 0.1); }
+        .cursor:hover .title-text { color: #f87171; }
+
+        /* 10. Rage Golf (Fiery Volcano Orange Course Theme) */
+        .golf { background: linear-gradient(135deg, #2d1910, #170b05); border-top: 5px solid #f97316; }
+        .golf .tag { color: #fb923c; background: rgba(249, 115, 22, 0.1); }
+        .golf:hover .title-text { color: #fb923c; }
+
+        /* 11. Judge Sim (Courtroom Mahogany Wood Theme) */
+        .judge { background: linear-gradient(135deg, #241911, #130c07); border-top: 5px solid #d97706; }
+        .judge .tag { color: #fbbf24; background: rgba(217, 119, 6, 0.1); }
+        .judge:hover .title-text { color: #fbbf24; }
+
+        /* 12. STOCKS (Bull Market Trading Terminal Green Theme) */
+        .stocks { background: linear-gradient(135deg, #091e14, #030f0a); border-top: 5px solid #10b981; }
+        .stocks .tag { color: #34d399; background: rgba(16, 185, 129, 0.1); }
+        .stocks:hover .title-text { color: #34d399; }
+
+        /* 13. Apex Bank (High-Value Vault Platinum & Dark Gold Theme) */
+        .apex { background: linear-gradient(135deg, #171b26, #0d0f17); border-top: 5px solid #64748b; }
+        .apex .tag { color: #cbd5e1; background: rgba(100, 116, 139, 0.1); }
+        .apex:hover .title-text { color: #e2e8f0; }
+
+        /* 14. The Basics of Investing (Clean Fiscal Mint Green Theme) */
+        .investing { background: linear-gradient(135deg, #0b221e, #04120f); border-top: 5px solid #14b8a6; }
+        .investing .tag { color: #2dd4bf; background: rgba(20, 184, 166, 0.1); }
+        .investing:hover .title-text { color: #2dd4bf; }
+
+        /* 15. The Potato Clicker (Farming Brown / Golden Potato Theme) */
+        .potato { background: linear-gradient(135deg, #241a10, #130d07); border-top: 5px solid #b45309; }
+        .potato .tag { color: #fbbf24; background: rgba(180, 83, 9, 0.1); }
+        .potato:hover .title-text { color: #fcd34d; }
+
+        footer {
+            margin-top: 80px;
+            color: #334155;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 30px;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Ulti Coders Creations</h1>
+        <p>Dashboard Systems</p>
+        <div class="header-line"></div>
+    </header>
+
+    <main class="grid-container">
+        <a href="https://itsmeorwasit-oss.github.io/Soverign-Press./" class="game-card sovereign" target="_blank">
+            <span class="tag">NewsPaper</span>
+            <span class="title-text">Sovereign Press</span>
+            <div class="card-icon-bg">📰</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,15 Q25,5 50,12 T100,5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/Minecraft-Chrono-s/" class="game-card chronos" target="_blank">
+            <span class="tag">Minecraft</span>
+            <span class="title-text">The MC Chronos</span>
+            <div class="card-icon-bg">🧱</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,18 L20,10 L40,15 L60,5 L80,12 L100,2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/THE-GAMING-ORACLE/" class="game-card oracle" target="_blank">
+            <span class="tag">Mystic</span>
+            <span class="title-text">Gaming Oracle</span>
+            <div class="card-icon-bg">🔮</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q30,18 50,2 T100,15" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/VaultMatrix/" class="game-card vault" target="_blank">
+            <span class="tag">Hacking</span>
+            <span class="title-text">Vault Matrix</span>
+            <div class="card-icon-bg">💻</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,5 L10,5 L10,15 L30,15 L30,2 L70,2 L70,18 L100,18" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/Arcade-Airplane/" class="game-card airplane" target="_blank">
+            <span class="tag">Aviation</span>
+            <span class="title-text">Airplane</span>
+            <div class="card-icon-bg">✈️</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,15 C30,5 70,5 100,15" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/TheCreatorsWords/" class="game-card creators" target="_blank">
+            <span class="tag">Writing</span>
+            <span class="title-text">Creators Words</span>
+            <div class="card-icon-bg">✍️</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 H20 V15 H40 V5 H70 V12 H100" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/Ice-Cream-Game/" class="game-card icecream" target="_blank">
+            <span class="tag">Tycoon</span>
+            <span class="title-text">ICE CREAM GAME</span>
+            <div class="card-icon-bg">🍦</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,20 Q25,0 50,20 T100,20" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/Space-Recon/" class="game-card space" target="_blank">
+            <span class="tag">Sci-Fi</span>
+            <span class="title-text">Space Recon</span>
+            <div class="card-icon-bg">🚀</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,5 L25,18 L50,8 L75,15 L100,2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/Cursor-Combat/" class="game-card cursor" target="_blank">
+            <span class="tag">Combat</span>
+            <span class="title-text">Cursor Combat</span>
+            <div class="card-icon-bg">⚔️</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 L10,2 L20,18 L30,5 L40,15 L100,10" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/Rage-Golf/" class="game-card golf" target="_blank">
+            <span class="tag">Golf</span>
+            <span class="title-text">Rage Golf</span>
+            <div class="card-icon-bg">⛳</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,15 Q50,0 100,15" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/Judge-Sim/" class="game-card judge" target="_blank">
+            <span class="tag">Simulator</span>
+            <span class="title-text">Judge Sim</span>
+            <div class="card-icon-bg">⚖️</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 H100" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/StOcKs-FaKe/" class="game-card stocks" target="_blank">
+            <span class="tag">Stocks</span>
+            <span class="title-text">STOCKS</span>
+            <div class="card-icon-bg">📈</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,18 L20,12 L40,14 L60,6 L80,8 L100,2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/Apex-Bank/" class="game-card apex" target="_blank">
+            <span class="tag">Banking</span>
+            <span class="title-text">Apex Bank</span>
+            <div class="card-icon-bg">🏦</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 L50,10 L50,2 L100,2" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/The-Basics-Of-Investing/" class="game-card investing" target="_blank">
+            <span class="tag">Investing</span>
+            <span class="title-text">The Basics of Investing</span>
+            <div class="card-icon-bg">💰</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,19 Q50,12 100,3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </a>
+        
+        <a href="https://itsmeorwasit-oss.github.io/The-Potato-Clicker/" class="game-card potato" target="_blank">
+            <span class="tag">Clicker</span>
+            <span class="title-text">The Potato Clicker</span>
+            <div class="card-icon-bg">🥔</div>
+            <svg class="card-bg-graph" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,15 Q25,18 50,12 T100,15" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+    </main>
+
+    <footer>
+        Funded by thegamemaster09
+    </footer>
+
+</body>
+</html>
